@@ -6,7 +6,6 @@ This project represents a complete digital art marketplace with a unique lofi/cy
 
 🔗 **Live Demo**: [Visit SumoArts Gallery](https://github.com/whatsupsumit/SumoArts)
 
-![SumoArts Banner](public/images/sumoarts-banner.png)
 
 <br>
 
@@ -169,23 +168,22 @@ npm run build
 ## Screenshots
 
 ### 🏠 SumoArts Home - Immersive Gallery Experience
-![SumoArts Home](public/images/screenshots/homepage.png)
 *Landing page with terminal-inspired navigation and interactive artwork slider*
 
 ### 🎨 Gallery Studio - Pinterest-Style Upload Interface
-![Gallery Studio](public/images/screenshots/gallery-studio.png)
+
 *Drag & drop artwork upload with lofi design and real-time preview*
 
 ### 💖 Art Discovery - Terminal-Inspired Browsing
-![Art Discovery](public/images/screenshots/art-lovers.png)
+
 *Curated artwork discovery with smooth filtering and collection features*
 
 ### 👨‍🎨 Artist Dashboard - Professional Management
-![Artist Dashboard](public/images/screenshots/artist-dashboard.png)
+
 *Complete artwork management with analytics and portfolio tools*
 
 ### 🔐 Authentication - Lofi Login Experience
-![Authentication](public/images/screenshots/auth.png)
+
 *Terminal-styled authentication with smooth form transitions*
 
 ## Features in Detail
