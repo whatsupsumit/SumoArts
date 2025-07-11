@@ -12,6 +12,50 @@ export default function HomePage() {
 
   // Dynamic center image highlighting
   useEffect(() => {
+    // Add dynamic floating animations CSS
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes animate-float {
+        0%, 100% { transform: translateY(0px) rotate(4deg); }
+        50% { transform: translateY(-4px) rotate(4deg); }
+      }
+      @keyframes animate-float-delayed {
+        0%, 100% { transform: translateY(0px) rotate(-3deg); }
+        50% { transform: translateY(-3px) rotate(-3deg); }
+      }
+      @keyframes animate-float-slow {
+        0%, 100% { transform: translateY(0px) rotate(8deg); }
+        50% { transform: translateY(-2px) rotate(8deg); }
+      }
+      @keyframes animate-float-reverse {
+        0%, 100% { transform: translateY(0px) rotate(-6deg); }
+        50% { transform: translateY(-5px) rotate(-6deg); }
+      }
+      .animate-float {
+        animation: animate-float 6s ease-in-out infinite;
+      }
+      .animate-float-delayed {
+        animation: animate-float-delayed 7s ease-in-out infinite;
+        animation-delay: 1.5s;
+      }
+      .animate-float-slow {
+        animation: animate-float-slow 8s ease-in-out infinite;
+        animation-delay: 3s;
+      }
+      .animate-float-reverse {
+        animation: animate-float-reverse 6.5s ease-in-out infinite;
+        animation-delay: 0.8s;
+      }
+    `;
+    document.head.appendChild(style);
+
+    return () => {
+      document.head.removeChild(style);
+    };
+  }, []);
+
+  // Dynamic center image highlighting
+  useEffect(() => {
     const slider = sliderRef.current;
     if (!slider) return;
 
@@ -146,7 +190,7 @@ export default function HomePage() {
                 </div>
                 <div className="flex items-center gap-4">
                   <div className="text-[#666] text-xs" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
-                    6 collections
+                    5 collections
                   </div>
                   <div className="w-6 h-4 border border-[#FFA500]/40 rounded-sm flex items-center justify-center">
                     <div className="w-1.5 h-1.5 bg-[#FFA500] rounded-full animate-pulse"></div>
@@ -174,166 +218,240 @@ export default function HomePage() {
                   <div className="absolute top-1/2 right-1/3 w-24 h-24 border border-[#FFA500] -rotate-12"></div>
                 </div>
 
-                {/* Main Gallery Grid */}
-                <div className="flex items-center justify-center h-full pt-8">
-                  <div 
-                    ref={sliderRef}
-                    id="gallery-slider"
-                    className="flex gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory scrollbar-hide py-8"
-                    style={{
-                      scrollbarWidth: 'none',
-                      msOverflowStyle: 'none',
-                      scrollBehavior: 'smooth'
-                    }}
-                  >
-                    {/* Dynamic Art Cards */}
-                    {[
-                      '/images/download 1.jpeg',
-                      '/images/download 2.jfif', 
-                      '/images/download 3.jpeg',
-                      '/images/download 4.jfif',
-                      '/images/download 5.jfif',
-                      '/images/download 6.jpeg'
-                    ].map((imgSrc, index) => (
+                {/* Dynamic Gallery Showcase - 5 Artworks - Lofi Layout */}
+                <div className="flex items-center justify-center h-full pt-4">
+                  {/* Balanced Gallery Layout - Lofi Aesthetic */}
+                  <div className="relative w-full max-w-6xl h-[520px] overflow-hidden">
+                    
+                    {/* Center Featured Artwork - Main Hero */}
+                    <div className="absolute top-12 left-1/2 -translate-x-1/2 w-64 h-48 group cursor-pointer z-30">
                       <div 
-                        key={index}
-                        className="flex-none snap-center group cursor-pointer relative"
+                        className="relative rounded-xl overflow-hidden shadow-2xl transform transition-all duration-700 ease-out"
                         style={{
-                          transform: `perspective(1000px) rotateY(${index % 2 === 0 ? '2deg' : '-2deg'}) translateZ(0)`,
-                          transformStyle: 'preserve-3d'
+                          boxShadow: '0 25px 60px rgba(0,0,0,0.85), 0 0 40px rgba(255,165,0,0.4)',
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.transform = 'translateY(-12px) scale(1.04)';
+                          e.currentTarget.style.boxShadow = '0 35px 70px rgba(0,0,0,0.9), 0 0 55px rgba(255,165,0,0.6)';
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.transform = 'translateY(0px) scale(1)';
+                          e.currentTarget.style.boxShadow = '0 25px 60px rgba(0,0,0,0.85), 0 0 40px rgba(255,165,0,0.4)';
                         }}
                       >
-                        {/* Enhanced Art Frame */}
-                        <div 
-                          className="relative bg-gradient-to-br from-[#1a1a1a] via-[#2a2a2a] to-[#1a1a1a] rounded-xl border border-[#333] overflow-hidden transition-all duration-700 ease-out"
+                        <img 
+                          src="/images/download 5.jfif"
+                          alt="Featured Artwork"
+                          className="w-full h-full object-cover transition-all duration-700"
                           style={{
-                            boxShadow: '0 10px 30px rgba(0,0,0,0.6), 0 0 20px rgba(255,165,0,0.1)',
-                            transition: 'all 0.7s cubic-bezier(0.34, 1.56, 0.64, 1)'
+                            filter: 'contrast(1.15) brightness(1.05) saturate(1.25)',
                           }}
-                          onMouseEnter={(e) => {
-                            e.currentTarget.style.transform = 'perspective(1000px) rotateY(0deg) translateY(-12px) translateZ(20px) scale(1.02)';
-                            e.currentTarget.style.boxShadow = '0 25px 50px rgba(0,0,0,0.7), 0 0 30px rgba(255,165,0,0.2), inset 0 0 10px rgba(255,165,0,0.05)';
-                            e.currentTarget.style.borderColor = '#FFA500';
-                            e.currentTarget.style.zIndex = '100';
+                          onError={(e) => {
+                            e.target.style.background = 'linear-gradient(135deg, #FFA500, #ff8c42, #1a1a1a)';
                           }}
-                          onMouseLeave={(e) => {
-                            e.currentTarget.style.transform = `perspective(1000px) rotateY(${index % 2 === 0 ? '2deg' : '-2deg'}) translateY(0px) translateZ(0px) scale(1)`;
-                            e.currentTarget.style.boxShadow = '0 10px 30px rgba(0,0,0,0.6), 0 0 20px rgba(255,165,0,0.1)';
-                            e.currentTarget.style.borderColor = '#333';
-                            e.currentTarget.style.zIndex = 'auto';
+                        />
+                        
+                        {/* Enhanced Featured Badge */}
+                        <div className="absolute -top-3 -right-3 bg-gradient-to-r from-[#FFA500] to-[#ff8c42] text-black px-4 py-1.5 rounded-full text-xs font-bold shadow-xl transform rotate-12 group-hover:rotate-0 transition-all duration-300">
+                          ★ PRIME
+                        </div>
+
+                        {/* Subtle Glow Overlay */}
+                        <div className="absolute inset-0 bg-gradient-to-br from-[#FFA500]/5 via-transparent to-[#ff8c42]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                      </div>
+                    </div>
+
+                    {/* Top Left - Compact Portrait */}
+                    <div className="absolute top-0 left-8 w-52 h-68 group cursor-pointer z-25 animate-float">
+                      <div 
+                        className="relative rounded-xl overflow-hidden shadow-xl transform rotate-4 hover:rotate-1 transition-all duration-600"
+                        style={{
+                          boxShadow: '0 20px 50px rgba(0,0,0,0.7), 0 0 25px rgba(255,165,0,0.2)',
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.transform = 'rotate(1deg) translateY(-8px) scale(1.03)';
+                          e.currentTarget.style.boxShadow = '0 30px 60px rgba(0,0,0,0.8), 0 0 40px rgba(255,165,0,0.35)';
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.transform = 'rotate(4deg) translateY(0px) scale(1)';
+                          e.currentTarget.style.boxShadow = '0 20px 50px rgba(0,0,0,0.7), 0 0 25px rgba(255,165,0,0.2)';
+                        }}
+                      >
+                        <img 
+                          src="/images/download 2.jfif"
+                          alt="Lofi Artwork 2"
+                          className="w-full h-full object-cover transition-all duration-700"
+                          style={{ filter: 'contrast(1.15) brightness(1.02) saturate(1.25)' }}
+                          onError={(e) => {
+                            e.target.style.background = 'linear-gradient(135deg, #FFA500, #ff8c42, #1a1a1a)';
                           }}
-                        >
-                          {/* Corner Tech Elements */}
-                          <div className="absolute top-2 left-2 w-4 h-4 border-l-2 border-t-2 border-[#FFA500] opacity-40"></div>
-                          <div className="absolute top-2 right-2 w-4 h-4 border-r-2 border-t-2 border-[#FFA500] opacity-40"></div>
-                          <div className="absolute bottom-2 left-2 w-4 h-4 border-l-2 border-b-2 border-[#FFA500] opacity-40"></div>
-                          <div className="absolute bottom-2 right-2 w-4 h-4 border-r-2 border-b-2 border-[#FFA500] opacity-40"></div>
-
-                          {/* Art Image with Better Sizing */}
-                          <div className="relative p-3">
-                            <img 
-                              src={imgSrc}
-                              alt={`Artwork ${index + 1}`}
-                              className="w-[300px] h-[400px] object-cover rounded-lg transition-all duration-700"
-                              style={{
-                                filter: 'contrast(1.1) brightness(0.9) saturate(1.1)',
-                                transition: 'all 0.7s ease-out'
-                              }}
-                              onMouseEnter={(e) => {
-                                e.target.style.filter = 'contrast(1.2) brightness(1.05) saturate(1.2) hue-rotate(3deg)';
-                                e.target.style.transform = 'scale(1.01)';
-                              }}
-                              onMouseLeave={(e) => {
-                                e.target.style.filter = 'contrast(1.1) brightness(0.9) saturate(1.1)';
-                                e.target.style.transform = 'scale(1)';
-                              }}
-                              onError={(e) => {
-                                e.target.style.background = 'linear-gradient(135deg, #FFA500, #ff8c42, #1a1a1a)';
-                                e.target.style.backgroundColor = '#FFA500';
-                              }}
-                            />
-                            
-                            {/* Hover Glow Effect */}
-                            <div className="absolute inset-0 bg-gradient-to-t from-[#FFA500]/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-lg pointer-events-none"></div>
-                          </div>
-
-                          {/* Enhanced Info Panel */}
-                          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/95 via-black/80 to-transparent p-4 backdrop-blur-sm">
-                            <div className="flex items-center justify-between mb-2">
-                              <div>
-                                <div className="text-white text-sm font-bold mb-1" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
-                                  {['GENESIS', 'FLUX', 'VOID', 'NEON', 'CYBER', 'AURA'][index]}_{String(index + 1).padStart(2, '0')}
-                                </div>
-                                <div className="text-[#FFA500] text-xs opacity-90" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
-                                  {['abstract.minimal', 'surreal.flow', 'digital.dreams', 'neon.symphony', 'cyber.essence', 'lofi.vibes'][index]}
-                                </div>
-                              </div>
-                              <div className="flex flex-col items-end gap-1">
-                                <div className="w-2 h-2 bg-[#FFA500] rounded-full animate-pulse"></div>
-                                <div className="text-[#666] text-xs" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
-                                  ${(Math.random() * 5 + 1).toFixed(1)}K
-                                </div>
-                              </div>
-                            </div>
-                            
-                            {/* Status Bar */}
-                            <div className="flex items-center gap-2 mt-2">
-                              <div className="flex-1 h-1 bg-[#333] rounded-full overflow-hidden">
-                                <div className="h-full bg-gradient-to-r from-[#FFA500] to-[#ff8c42] rounded-full" style={{ width: `${60 + index * 10}%` }}></div>
-                              </div>
-                              <span className="text-[#FFA500] text-xs" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
-                                {60 + index * 10}%
-                              </span>
-                            </div>
-                          </div>
-
-                          {/* Floating Action Button */}
-                          <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-300 transform group-hover:scale-105">
-                            <div className="w-8 h-8 bg-[#FFA500] rounded-full flex items-center justify-center shadow-lg">
-                              <svg className="w-4 h-4 text-black" fill="currentColor" viewBox="0 0 20 20">
-                                <path d="M10 12l-4-4h8l-4 4z"/>
-                              </svg>
-                            </div>
-                          </div>
+                        />
+                        
+                        <div className="absolute bottom-3 left-3 text-white text-sm font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
+                          FLUX_02
                         </div>
                       </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Enhanced Navigation */}
-                <button 
-                  onClick={() => {
-                    const slider = document.getElementById('gallery-slider');
-                    slider.scrollBy({ left: -320, behavior: 'smooth' });
-                  }}
-                  className="absolute left-2 top-1/2 -translate-y-1/2 z-30 w-12 h-12 bg-gradient-to-r from-[#1a1a1a] to-[#2a2a2a] border border-[#333] rounded-full text-[#666] hover:text-[#FFA500] hover:border-[#FFA500] hover:shadow-lg hover:shadow-[#FFA500]/20 transition-all duration-300 flex items-center justify-center group backdrop-blur-lg"
-                >
-                  <span className="group-hover:-translate-x-1 transition-transform duration-300 text-lg">←</span>
-                </button>
-                
-                <button 
-                  onClick={() => {
-                    const slider = document.getElementById('gallery-slider');
-                    slider.scrollBy({ left: 320, behavior: 'smooth' });
-                  }}
-                  className="absolute right-2 top-1/2 -translate-y-1/2 z-30 w-12 h-12 bg-gradient-to-r from-[#2a2a2a] to-[#1a1a1a] border border-[#333] rounded-full text-[#666] hover:text-[#FFA500] hover:border-[#FFA500] hover:shadow-lg hover:shadow-[#FFA500]/20 transition-all duration-300 flex items-center justify-center group backdrop-blur-lg"
-                >
-                  <span className="group-hover:translate-x-1 transition-transform duration-300 text-lg">→</span>
-                </button>
-
-                {/* Interactive Progress Bar */}
-                <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
-                  <div className="flex items-center gap-3 bg-[#1a1a1a]/80 backdrop-blur-lg border border-[#333] rounded-full px-4 py-2">
-                    <div className="flex gap-2">
-                      {Array.from({length: 6}).map((_, i) => (
-                        <div key={i} className="w-2 h-2 bg-[#333] hover:bg-[#FFA500] rounded-full transition-colors duration-300 cursor-pointer"></div>
-                      ))}
                     </div>
-                    <div className="w-px h-4 bg-[#333]"></div>
-                    <span className="text-[#666] text-xs" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
-                      scroll
-                    </span>
+
+                    {/* Top Right - Balanced Landscape */}
+                    <div className="absolute top-0 right-8 w-64 h-48 group cursor-pointer z-25 animate-float-delayed">
+                      <div 
+                        className="relative rounded-xl overflow-hidden shadow-xl transform -rotate-3 hover:rotate-0 transition-all duration-600"
+                        style={{
+                          boxShadow: '0 20px 50px rgba(0,0,0,0.7), 0 0 25px rgba(255,165,0,0.2)',
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.transform = 'rotate(0deg) translateY(-8px) scale(1.03)';
+                          e.currentTarget.style.boxShadow = '0 30px 60px rgba(0,0,0,0.8), 0 0 40px rgba(255,165,0,0.35)';
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.transform = 'rotate(-3deg) translateY(0px) scale(1)';
+                          e.currentTarget.style.boxShadow = '0 20px 50px rgba(0,0,0,0.7), 0 0 25px rgba(255,165,0,0.2)';
+                        }}
+                      >
+                        <img 
+                          src="/images/download 3.jpeg"
+                          alt="Lofi Artwork 3"
+                          className="w-full h-full object-cover transition-all duration-700"
+                          style={{ filter: 'contrast(1.15) brightness(1.02) saturate(1.25)' }}
+                          onError={(e) => {
+                            e.target.style.background = 'linear-gradient(135deg, #FFA500, #ff8c42, #1a1a1a)';
+                          }}
+                        />
+                        
+                        <div className="absolute bottom-3 right-3 text-[#FFA500] text-sm font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
+                          VOID_03
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Bottom Left - Perfect Square */}
+                    <div className="absolute bottom-12 left-16 w-48 h-48 group cursor-pointer z-20 animate-float-slow">
+                      <div 
+                        className="relative rounded-xl overflow-hidden shadow-xl transform rotate-8 hover:rotate-4 transition-all duration-600"
+                        style={{
+                          boxShadow: '0 18px 45px rgba(0,0,0,0.65), 0 0 20px rgba(255,165,0,0.15)',
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.transform = 'rotate(4deg) translateY(-6px) scale(1.04)';
+                          e.currentTarget.style.boxShadow = '0 25px 55px rgba(0,0,0,0.75), 0 0 35px rgba(255,165,0,0.25)';
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.transform = 'rotate(8deg) translateY(0px) scale(1)';
+                          e.currentTarget.style.boxShadow = '0 18px 45px rgba(0,0,0,0.65), 0 0 20px rgba(255,165,0,0.15)';
+                        }}
+                      >
+                        <img 
+                          src="/images/download 4.jfif"
+                          alt="Lofi Artwork 4"
+                          className="w-full h-full object-cover transition-all duration-700"
+                          style={{ filter: 'contrast(1.15) brightness(1.02) saturate(1.25)' }}
+                          onError={(e) => {
+                            e.target.style.background = 'linear-gradient(135deg, #FFA500, #ff8c42, #1a1a1a)';
+                          }}
+                        />
+                        
+                        <div className="absolute bottom-3 left-3 text-white text-sm font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
+                          NEON_04
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Bottom Right - Elegant Portrait */}
+                    <div className="absolute bottom-8 right-12 w-44 h-60 group cursor-pointer z-20 animate-float-reverse">
+                      <div 
+                        className="relative rounded-xl overflow-hidden shadow-xl transform -rotate-6 hover:-rotate-2 transition-all duration-600"
+                        style={{
+                          boxShadow: '0 18px 45px rgba(0,0,0,0.65), 0 0 20px rgba(255,165,0,0.15)',
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.transform = 'rotate(-2deg) translateY(-6px) scale(1.04)';
+                          e.currentTarget.style.boxShadow = '0 25px 55px rgba(0,0,0,0.75), 0 0 35px rgba(255,165,0,0.25)';
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.transform = 'rotate(-6deg) translateY(0px) scale(1)';
+                          e.currentTarget.style.boxShadow = '0 18px 45px rgba(0,0,0,0.65), 0 0 20px rgba(255,165,0,0.15)';
+                        }}
+                      >
+                        <img 
+                          src="/images/download 6.jpeg"
+                          alt="Lofi Artwork 5"
+                          className="w-full h-full object-cover transition-all duration-700"
+                          style={{ filter: 'contrast(1.15) brightness(1.02) saturate(1.25)' }}
+                          onError={(e) => {
+                            e.target.style.background = 'linear-gradient(135deg, #FFA500, #ff8c42, #1a1a1a)';
+                          }}
+                        />
+                        
+                        {/* Subtle Status Badge */}
+                        <div className="absolute top-3 right-3 bg-[#FFA500]/90 text-black px-2 py-1 rounded-md text-xs font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                          FRESH
+                        </div>
+                        
+                        <div className="absolute bottom-3 right-3 text-[#FFA500] text-sm font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
+                          WAVE_06
+                        </div>
+                      </div>
+                    </div>
+
+
+
+                    {/* Subtle Lofi Visual Elements */}
+                    
+                    {/* Gentle Connection Lines */}
+                    <div className="absolute top-32 left-60 w-20 h-[1px] bg-gradient-to-r from-[#FFA500]/30 to-transparent transform rotate-20 opacity-40"></div>
+                    <div className="absolute top-56 right-68 w-16 h-[1px] bg-gradient-to-l from-[#FFA500]/25 to-transparent transform -rotate-12 opacity-35"></div>
+                    <div className="absolute bottom-48 left-72 w-24 h-[1px] bg-gradient-to-r from-[#FFA500]/28 to-transparent transform rotate-35 opacity-38"></div>
+                    
+                    {/* Ambient Lofi Particles */}
+                    <div className="absolute top-24 left-40 w-1.5 h-1.5 bg-[#FFA500]/40 rounded-full animate-pulse"></div>
+                    <div className="absolute top-56 right-32 w-1 h-1 bg-[#FFA500]/35 rounded-full animate-pulse delay-1000"></div>
+                    <div className="absolute bottom-40 left-1/4 w-2 h-2 bg-[#FFA500]/30 rounded-full animate-pulse delay-2000"></div>
+                    <div className="absolute bottom-56 right-1/3 w-1 h-1 bg-[#FFA500]/45 rounded-full animate-pulse delay-3000"></div>
+                    <div className="absolute top-40 left-2/3 w-1.5 h-1.5 bg-[#FFA500]/32 rounded-full animate-pulse delay-1500"></div>
+                    <div className="absolute top-68 right-1/4 w-1 h-1 bg-[#ff8c42]/38 rounded-full animate-pulse delay-2500"></div>
+
+                    {/* Clean Code Comments */}
+                    <div className="absolute top-4 left-4 opacity-40">
+                      <span className="text-[#FFA500] text-xs" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
+                        {'// lofi_gallery.jsx'}
+                      </span>
+                    </div>
+                    
+                    <div className="absolute bottom-4 right-4 opacity-40">
+                      <span className="text-[#666] text-xs" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
+                        {'/* balanced_layout.css */'}
+                      </span>
+                    </div>
+
+                    {/* Refined Status Navigation */}
+                    <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
+                      <div className="flex items-center gap-4 bg-[#1a1a1a]/85 backdrop-blur-md border border-[#333]/50 rounded-2xl px-6 py-3 shadow-lg">
+                        <div className="flex gap-2.5">
+                          {Array.from({length: 5}).map((_, i) => (
+                            <div 
+                              key={i} 
+                              className="w-2 h-2 bg-[#333] hover:bg-[#FFA500] rounded-full transition-all duration-300 cursor-pointer hover:scale-110"
+                              style={{
+                                background: i === 0 ? '#FFA500' : '#333'
+                              }}
+                            ></div>
+                          ))}
+                        </div>
+                        <div className="w-px h-4 bg-[#333]"></div>
+                        <div className="flex items-center gap-2">
+                          <div className="w-2 h-2 bg-[#FFA500] rounded-full opacity-70"></div>
+                          <span className="text-[#666] text-xs font-bold" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
+                            gallery.lofi
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Soft Background Ambient Effects */}
+                    <div className="absolute inset-0 bg-gradient-radial from-[#FFA500]/6 via-transparent to-transparent opacity-50 pointer-events-none"></div>
+                    <div className="absolute top-1/4 left-1/4 w-80 h-80 bg-gradient-radial from-[#FFA500]/3 to-transparent rounded-full opacity-30 pointer-events-none blur-3xl"></div>
+                    <div className="absolute bottom-1/4 right-1/4 w-72 h-72 bg-gradient-radial from-[#ff8c42]/4 to-transparent rounded-full opacity-25 pointer-events-none blur-2xl"></div>
                   </div>
                 </div>
               </div>
