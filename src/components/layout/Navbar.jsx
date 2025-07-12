@@ -1,17 +1,9 @@
 import { useState } from "react";
-import PropTypes from "prop-types";
-import BurgerMenuBtn from "./BurgerMenuBtn";
 import FullScreenMenu from "./FullScreenMenu";
 import { useAuth } from "../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 
-export default function Navbar({
-  isArtistPage,
-  isArtLoversPage,
-  isHomePage,
-  isArtistDashboard,
-  isDashboard,
-}) {
+export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const { currentUser, cart, isArtist } = useAuth();
   const navigate = useNavigate();
@@ -179,18 +171,27 @@ export default function Navbar({
             </div>
           </div>
 
-          {/* Mobile Menu - Enhanced */}
-          <div className="flex sm:hidden relative z-10">
-            <div className="bg-gradient-to-r from-[#1a1a1a] to-[#2a2a2a] border border-[#333] hover:border-[#FFA500] p-2 transition-all duration-300 backdrop-blur-sm">
-              <BurgerMenuBtn
-                isOpen={isOpen}
-                setIsOpen={setIsOpen}
-                isArtistPage={isArtistPage}
-                isArtLoversPage={isArtLoversPage}
-                isHomePage={isHomePage}
-                isArtistDashboard={isArtistDashboard}
-                isDashboard={isDashboard}
-              />
+          {/* Mobile Menu - Enhanced & Sticky Bottom Bar */}
+          <div className="sm:hidden fixed bottom-0 left-0 w-full z-50 bg-gradient-to-r from-[#18120a] via-[#1a1a1a] to-[#18120a] border-t border-[#FFA500]/40 flex items-center justify-between px-4 py-2 shadow-2xl backdrop-blur-md">
+            {/* Logo */}
+            <div className="flex items-center gap-1 cursor-pointer" onClick={() => navigate('/') }>
+              <span className="bg-[#FFA500] text-[#000] px-2 py-1 font-mono font-bold text-base border border-[#FFA500] rounded">S</span>
+              <span className="text-[#FFA500] font-mono font-bold text-base tracking-wider">umo</span>
+            </div>
+            {/* Nav Icons */}
+            <div className="flex items-center gap-4">
+              <button title="Favorites" onClick={handleFavoritesClick} className="p-2 rounded-full bg-[#232323] border border-[#FFA500]/40 text-[#FFA500] shadow hover:bg-[#FFA500] hover:text-[#18120a] transition-all duration-200">
+                <span className="text-lg">♥</span>
+              </button>
+              <button title="Cart" onClick={() => navigate('/cart')} className="p-2 rounded-full bg-[#232323] border border-[#FFA500]/40 text-[#FFA500] shadow hover:bg-[#FFA500] hover:text-[#18120a] transition-all duration-200 relative">
+                <span className="text-lg">⊞</span>
+                {cart.length > 0 && (
+                  <span className="absolute -top-2 -right-2 bg-[#FFA500] text-[#000] text-xs px-1.5 py-0.5 rounded-full border border-[#FFA500] animate-pulse">{cart.reduce((total, item) => total + (item.quantity || 1), 0)}</span>
+                )}
+              </button>
+              <button title="Menu" onClick={() => setIsOpen(!isOpen)} className="p-2 rounded-full bg-[#232323] border border-[#FFA500]/40 text-[#FFA500] shadow hover:bg-[#FFA500] hover:text-[#18120a] transition-all duration-200">
+                <span className="text-xl">≡</span>
+              </button>
             </div>
           </div>
         </div>
@@ -205,19 +206,5 @@ export default function Navbar({
 }
 
 // PropTypes validation
-Navbar.propTypes = {
-  isArtistPage: PropTypes.bool,
-  isArtLoversPage: PropTypes.bool,
-  isHomePage: PropTypes.bool,
-  isArtistDashboard: PropTypes.bool,
-  isDashboard: PropTypes.bool,
-};
+// No propTypes needed; all props removed for cleanliness
 
-// Default values for props
-Navbar.defaultProps = {
-  isArtistPage: false,
-  isArtLoversPage: false,
-  isHomePage: false,
-  isArtistDashboard: false,
-  isDashboard: false,
-};

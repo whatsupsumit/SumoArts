@@ -1,10 +1,16 @@
 import { useNavigate } from "react-router-dom";
 import Navbar from "../components/layout/Navbar";
 import { useAuth } from "../contexts/AuthContext";
+import { useEffect } from "react";
 
 export default function ForArtistsPage() {
   const { currentUser, isArtist } = useAuth();
   const navigate = useNavigate();
+
+  // Scroll to top on mount (fixes mobile navigation to bottom issue)
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+  }, []);
 
   const handleArtistClick = () => {
     if (!currentUser) {
