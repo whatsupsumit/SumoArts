@@ -492,8 +492,8 @@ export default function HomePage() {
                     </button>
                     <button
                       onClick={handleArtLoverClick}
-                      className="flex-1 border border-[#FFA500] text-[#FFA500] py-2 px-4 hover:bg-[#FFA500]/10 transition-all duration-300 font-bold text-xs uppercase tracking-wider"
-                      style={{ fontFamily: "'JetBrains Mono', monospace" }}
+                      className="flex-1 border-2 border-[#FFA500] text-[#FFA500] py-2 px-4 bg-[#18120a]/80 hover:bg-[#FFA500] hover:text-[#18120a] transition-all duration-300 font-extrabold text-xs uppercase tracking-wider shadow-lg hover:shadow-[#FFA500]/40 outline-none focus:ring-2 focus:ring-[#FFA500]"
+                      style={{ fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.12em' }}
                     >
                       Collect →
                     </button>

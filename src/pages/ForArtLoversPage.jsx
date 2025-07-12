@@ -28,7 +28,7 @@ export default function ForArtLoversPage() {
       }));
       const response = await fetch(
         "https://api.unsplash.com/search/photos?" +
-          "query=contemporary+modern+fine+art+painting+exhibition+gallery+-photo+-artist+-camera+-supplies+-brushes+-pencil+-crayons&" +
+          "query=portraits+sketch+on+white+paper&" +
           "per_page=30&" +
           "orientation=landscape",
         {
@@ -366,7 +366,7 @@ export default function ForArtLoversPage() {
                       {/* Price tag with glitch effect */}
                       <div className="absolute bottom-0 left-0 m-3 z-10">
                         <div className="bg-[var(--accent)] text-[var(--bg)] px-3 py-1 border border-[var(--accent)] font-mono text-sm font-bold relative overflow-hidden" style={{ backgroundColor: 'var(--accent)', color: 'var(--bg)', borderColor: 'var(--accent)', fontFamily: 'var(--font-mono)' }}>
-                          €{artwork.price ? parseFloat(artwork.price).toFixed(2) : "25.00"}
+                          ₹{artwork.price ? (parseInt(artwork.price *10)).toLocaleString('en-IN') : "2,250"}
                           {/* Glitch effect */}
                           <div className="absolute inset-0 bg-[var(--bg)] opacity-20 animate-pulse"></div>
                         </div>

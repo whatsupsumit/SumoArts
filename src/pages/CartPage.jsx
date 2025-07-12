@@ -139,7 +139,7 @@ export default function CartPage() {
                     {item.user?.name || "Unknown Artist"}
                   </p>
                   <span className="font-bold text-lg text-var(--accent)" style={{ color: 'var(--accent)', fontFamily: 'var(--font-mono)' }}>
-                    €{parseFloat(item.price).toFixed(2)}
+                    ₹{parseInt(item.price * 10).toLocaleString('en-IN')}
                   </span>
                 </div>
                 <div className="flex flex-col items-right gap-4 pt-2">
@@ -186,10 +186,8 @@ export default function CartPage() {
                   </div>
                   {(item.quantity || 1) > 1 && (
                     <p className="text-sm text-var(--text) sm:text-right" style={{ color: 'var(--text)', fontFamily: 'var(--font-mono)' }}>
-                      Subtotal: €
-                      {(parseFloat(item.price) * (item.quantity || 1)).toFixed(
-                        2
-                      )}
+                      Subtotal: ₹
+                      {parseInt(item.price * 10 * (item.quantity || 1)).toLocaleString('en-IN')}
                     </p>
                   )}
                 </div>
@@ -204,7 +202,7 @@ export default function CartPage() {
           <div className="space-y-2 mb-4">
             <div className="flex justify-between text-var(--text)" style={{ color: 'var(--text)', fontFamily: 'var(--font-mono)' }}>
               <span>Subtotal</span>
-              <span>€{calculateTotal()}</span>
+              <span>₹{parseInt(calculateTotal() * 10).toLocaleString('en-IN')}</span>
             </div>
             <div className="flex justify-between text-var(--text)" style={{ color: 'var(--text)', fontFamily: 'var(--font-mono)' }}>
               <span>Shipping</span>
@@ -213,7 +211,7 @@ export default function CartPage() {
             <div className="border-t-2 border-var(--accent) pt-2 mt-2" style={{ borderColor: 'var(--accent)' }}>
               <div className="flex justify-between font-bold text-var(--accent)" style={{ color: 'var(--accent)', fontFamily: 'var(--font-mono)' }}>
                 <span>Total</span>
-                <span>€{calculateTotal().toFixed(2)}</span>
+                <span>₹{parseInt(calculateTotal() * 10).toLocaleString('en-IN')}</span>
               </div>
             </div>
           </div>
@@ -229,16 +227,16 @@ export default function CartPage() {
 
           {/* Sign in prompt for guests */}
           {!currentUser && (
-            <p className="text-sm text-var(--text) mt-2 text-center" style={{ color: 'var(--text)', fontFamily: 'var(--font-mono)' }}>
-              Have an account?{" "}
+            <p className="text-base font-semibold text-var(--text) mt-4 text-center bg-[#18120a]/70 rounded-lg py-3 px-4 shadow-md border border-var(--accent)/40 flex items-center justify-center gap-2" style={{ color: 'var(--text)', fontFamily: 'var(--font-mono)' }}>
+              <span>Have an account?</span>
               <button
                 onClick={() =>
                   navigate("/login", {
                     state: { returnTo: "/cart" },
                   })
                 }
-                className="text-var(--accent) hover:underline"
-                style={{ color: 'var(--accent)', fontFamily: 'var(--font-mono)' }}
+                className="ml-2 px-3 py-1 rounded bg-[var(--accent)] text-[var(--bg)] font-bold shadow hover:bg-opacity-90 focus:outline-none focus:ring-2 focus:ring-[var(--accent)] transition-all duration-200"
+                style={{ backgroundColor: 'var(--accent)', color: 'var(--bg)', fontFamily: 'var(--font-mono)' }}
               >
                 Sign in
               </button>

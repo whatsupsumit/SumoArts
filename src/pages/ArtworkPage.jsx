@@ -206,7 +206,7 @@ export default function ArtworkPage() {
 
           {/* Price and size */}
           <div className="space-y-2">
-            <p className="text-2xl font-bold text-var(--accent)" style={{ color: 'var(--accent)', fontFamily: 'var(--font-mono)' }}>€{price}</p>
+            <p className="text-2xl font-bold text-var(--accent)" style={{ color: 'var(--accent)', fontFamily: 'var(--font-mono)' }}>₹{(parseInt(price * 10)).toLocaleString('en-IN')}</p>
             <p className="text-var(--text)" style={{ color: 'var(--text)', fontFamily: 'var(--font-mono)' }}>
               W {size.width}cm × H {size.height}cm
             </p>
