@@ -1,269 +1,149 @@
-# SumoArts 🎨 Digital Art Gallery
+# The Frame 🎨 Online Art Gallery
 
-SumoArts is a modern, lofi-aesthetic digital art gallery platform where artists can showcase their work and art enthusiasts can discover, collect, and purchase unique artworks. Built with React, featuring a terminal-inspired design with cyberpunk elements.
+'The Frame' is an art marketplace platform where artists can showcase their work and art lovers can browse, favourite, and purchase artwork. Built with React, Vite, and TailwindCSS, featuring Firebase integration for authentication and storage.
 
-This project represents a complete digital art marketplace with a unique lofi/cyberpunk aesthetic, focusing on clean design and smooth user experience.
+This project was created as my final React SPA module project and is my first fully responsive and tested application! 🎉 It therefore represents a significant personal growth in my development journey! 
 
-🔗 **Live Demo**: [Visit SumoArts Gallery](https://github.com/whatsupsumit/SumoArts)
 
+🔗 [Visit the live demo here!](https://online-art-gallery-react.vercel.app/)
+
+<img src="public/images/screenshots/home-page.png" alt="Home Page" width="500" />
 
 <br>
+
 
 ## Table of Contents
 
 - [Key Features](#key-features)
 - [Tech Stack](#tech-stack)
-- [Design Philosophy](#design-philosophy)
+- [Technical Challenges and Solutions](#technical-challenges-and-solutions)
 - [Project Structure](#project-structure)
-- [Installation](#installation)
-- [Screenshots](#screenshots)
-- [Contributing](#contributing)
-- [License](#license)
+- [Acknowledgments](#acknowledgments)
+- [Preview](#preview)
+
 
 ## Key Features
 
-### 🎨 For Artists 
+#### 🎨 For Artists 
 
-- **Gallery Studio**: Pinterest-style upload interface with drag & drop functionality
-- **Artist Dashboard**: Complete artwork management and analytics system
-- **Professional Presentation**: Lofi-styled artwork showcasing with terminal aesthetics
-- **Custom Collections**: Organize artworks by size, category, and themes
-- **Real-time Updates**: Instant artwork publishing and management
+- Upload artwork with detailed information
+- Set prices and track engagement
+- Artist dashboard
 
-### 💖 For Art Collectors
+#### 💖 For Art Lovers 
  
-- **Curated Discovery**: Browse through carefully selected digital artworks
-- **Smart Collections**: Save favorites with advanced filtering and search
-- **Secure Experience**: Streamlined browsing with user authentication
-- **Collector Dashboard**: Track favorites and discover new artists
-- **Interactive Gallery**: Immersive artwork viewing with smooth animations
+- Save favourites for later
+- Shopping cart functionality
+- Detailed artwork views
+- Art lover dashboard
 
-### 💫 User Experience
+#### 💫 User Experience
 
-- **Lofi Aesthetic**: Terminal-inspired design with cyberpunk elements
-- **JetBrains Mono Typography**: Consistent coding-style fonts throughout
-- **Responsive Design**: Optimized for desktop, tablet, and mobile devices
-- **Smooth Animations**: Glitch effects, hover transitions, and loading states
-- **Terminal Navigation**: Cool back buttons with breadcrumb systems
-- **Dark Theme**: Professional dark interface with orange (#FFA500) accents
+- Responsive design for all devices
+- Intuitive navigation
+- Real-time notifications using React Hot Toast
+- Smooth animations
 
-### 🔐 Technology & Performance
+#### 🔐 Authentication & Data
 
-- **React 18**: Modern component architecture with hooks
-- **Firebase Integration**: Real-time data and secure authentication
-- **Advanced State Management**: Context API for seamless data flow
-- **Optimized Performance**: Fast loading with Vite bundler
-- **Modern Routing**: React Router v7 for smooth navigation
+- Firebase Authentication for user management
+- Firestore database for storing artwork data
+- Base64 image storage solution
+- Real-time data updates across components
+- Guest browsing with limited features
+- Hybrid data source (Firebase + Unsplash API)
 
 ## Tech Stack
 
 ### Frontend
-- **React 18** with Vite for lightning-fast development
-- **TailwindCSS** for utility-first styling and responsive design
-- **React Router v7** for seamless client-side navigation
-- **React Context API** for global state management
-- **React Hot Toast** for elegant user notifications
+- React 18 with Vite
+- TailwindCSS for styling
+- React Router v7 for navigation
+- React Context API for state management
+- React Hot Toast for notifications
 
 ### Backend & Services
-- **Firebase Authentication** for secure user management
-- **Firebase Firestore** for real-time database operations
-- **Base64 Storage** for efficient image handling and storage
-- **Modern ES6+** JavaScript with async/await patterns
+- Firebase Authentication
+- Firebase Firestore Database
+- Unsplash API for artwork gallery
+- Base64 image storage solution
+- Vercel for deployment
 
-### Design System
-- **JetBrains Mono** typography for authentic coding aesthetic
-- **Lofi Color Palette** with signature orange (#FFA500) accents
-- **Terminal-inspired UI** components with glitch effects
-- **CSS Grid & Flexbox** for responsive layouts
-- **Custom animations** with CSS transitions and transforms
+### Testing
+- Vitest for unit and integration testing
+- Cypress for E2E testing
+- React Testing Library
 
-## Design Philosophy
+## Technical Challenges and Solutions
 
-SumoArts embraces a **lofi cyberpunk aesthetic** that combines:
+### 1. Image Storage in Firebase Free Tier
+One of the biggest challenges was working within Firebase's free tier limitations while allowing artists to upload their artwork. Firebase Storage free tier has strict limitations and I needed to maintain image quality while reducing storage usage.
 
-- **Terminal Aesthetics**: Command-line inspired interfaces and navigation
-- **Coding Typography**: JetBrains Mono font family throughout the application
-- **Glitch Effects**: Subtle animations, hover states, and visual feedback
-- **Dark Theme**: Professional dark backgrounds with vibrant orange highlights
-- **Clean Minimalism**: Following the "Pure Art. No Gatekeepers." philosophy
-- **Interactive Elements**: Smooth transitions and engaging user interactions
+💡 **The Solution**: Implemented a Base64 conversion strategy (converted uploaded JPGs to Base64 strings before storage). The downside is that this requires users to upload smaller images - not ideal but it works and will do for now.
+
+### 2. Real-time Data Updates Across Components
+Another significant challenge was maintaining data consistency across different pages when artists updated their artwork details and their personal profiles. Changes needed to reflect immediately in favourites, cart, checkout, and artwork pages.
+
+💡 **The Solution**: Used React Context to keep track of all data in one central place. This way, when an artist makes a change, every page can see and display the updated information right away. Still, managing data updates was very tricky because different components needed different pieces of the same artwork data, and updates had to sync with Firebase in real-time. 
 
 ## Project Structure
 
-```
 src/     
 ├── components/       
-│   ├── auth/           # Login, Register, and auth components
-│   ├── common/         # Reusable UI components and utilities
-│   └── layout/         # Navbar, Footer, and layout components
-├── contexts/           
-│   └── AuthContext.jsx # Global authentication state management
-├── pages/              
-│   ├── HomePage.jsx        # Landing page with immersive gallery
-│   ├── GalleryStudio.jsx   # Pinterest-style artwork upload
-│   ├── ForArtLoversPage.jsx # Art discovery and browsing
-│   ├── ArtistDashboard.jsx  # Artist portfolio management
-│   ├── Login.jsx           # User authentication
-│   └── Register.jsx        # User registration
-├── config/             
-│   └── firebase.js     # Firebase configuration and setup
-├── styles/             
-│   └── index.css       # Global styling and CSS variables
-└── Routes.jsx          # Application routing configuration
-```
+│ ├── auth/     
+│ ├── common/    
+│ └── layout/    
+│     
+├── contexts/    
+│ └── AuthContext    
+│     
+├── pages/    
+│ ├── ArtistDashboard    
+│ ├── ArtworkPage    
+│ ├── BecomeArtist    
+│ ├── CartPage    
+│ ├── CheckoutPage    
+│ ├── CheckoutSuccessPage     
+│ ├── FavoritesPage     
+│ ├── ForArtistsPage      
+│ ├── ForArtLoversPage     
+│ ├── HomePage     
+│ └── UserDashboard     
+│      
+├── config/    
+│ └── firebase.js    
+│       
+├── tests/     
+│ ├── cypress/     
+│ └── vitest/      
 
-## Installation
-
-### Prerequisites
-- **Node.js** (v16 or higher)
-- **npm** or **yarn** package manager
-- **Firebase account** for backend services
-
-### Setup Instructions
-
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/whatsupsumit/SumoArts.git
-   cd SumoArts
-   ```
-
-2. **Install dependencies**
-   ```bash
-   npm install
-   ```
-
-3. **Set up Firebase**
-   - Create a new Firebase project at [Firebase Console](https://console.firebase.google.com/)
-   - Enable Authentication (Email/Password method)
-   - Enable Firestore Database
-   - Copy your Firebase config and update `src/config/firebase.js`:
-
-   ```javascript
-   // src/config/firebase.js
-   const firebaseConfig = {
-     apiKey: "your-api-key",
-     authDomain: "your-project.firebaseapp.com",
-     projectId: "your-project-id",
-     storageBucket: "your-project.appspot.com",
-     messagingSenderId: "your-sender-id",
-     appId: "your-app-id"
-   };
-   ```
-
-4. **Start the development server**
-   ```bash
-   npm run dev
-   ```
-
-5. **Open in browser**
-   - Navigate to `http://localhost:5173`
-   - Create an account or log in to start exploring!
-
-### Build for Production
-
-```bash
-npm run build
-```
-
-## Screenshots
-
-### 🏠 SumoArts Home - Immersive Gallery Experience
-*Landing page with terminal-inspired navigation and interactive artwork slider*
-
-### 🎨 Gallery Studio - Pinterest-Style Upload Interface
-
-*Drag & drop artwork upload with lofi design and real-time preview*
-
-### 💖 Art Discovery - Terminal-Inspired Browsing
-
-*Curated artwork discovery with smooth filtering and collection features*
-
-### 👨‍🎨 Artist Dashboard - Professional Management
-
-*Complete artwork management with analytics and portfolio tools*
-
-### 🔐 Authentication - Lofi Login Experience
-
-*Terminal-styled authentication with smooth form transitions*
-
-## Features in Detail
-
-### Gallery Studio
-- **Drag & Drop Upload**: Intuitive file upload with visual feedback
-- **Image Preview**: Real-time preview before publishing
-- **Metadata Management**: Add titles, descriptions, and tags
-- **Size Options**: Small, medium, and large display formats
-- **Instant Publishing**: One-click artwork publication
-
-### Art Discovery
-- **Curated Collections**: Hand-picked digital artworks
-- **Advanced Filtering**: Search by style, artist, and category
-- **Interactive Gallery**: Smooth hover effects and transitions
-- **Favorites System**: Save and organize preferred artworks
-- **Artist Profiles**: Discover and follow talented creators
-
-### User Experience
-- **Responsive Design**: Perfect on all screen sizes
-- **Fast Loading**: Optimized images and code splitting
-- **Offline Support**: Basic functionality without internet
-- **Keyboard Navigation**: Accessible interface design
-- **Screen Reader Friendly**: ARIA labels and semantic HTML
-
-## Contributing
-
-We welcome contributions to SumoArts! Here's how you can help:
-
-### Getting Started
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Make your changes
-4. Commit your changes (`git commit -m 'Add amazing feature'`)
-5. Push to the branch (`git push origin feature/amazing-feature`)
-6. Open a Pull Request
-
-### Contribution Guidelines
-- Follow the existing code style and conventions
-- Add comments for complex logic
-- Test your changes thoroughly
-- Update documentation as needed
-- Use meaningful commit messages
-
-### Areas We Need Help
-- 🎨 UI/UX improvements and new design elements
-- 🐛 Bug fixes and performance optimizations
-- 📱 Mobile responsiveness enhancements
-- 🔒 Security improvements and best practices
-- 📚 Documentation and tutorial creation
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Contact & Support
-
-- **GitHub**: [@whatsupsumit](https://github.com/whatsupsumit)
-- **Project Repository**: [SumoArts](https://github.com/whatsupsumit/SumoArts)
-- **Issues**: [Report a Bug](https://github.com/whatsupsumit/SumoArts/issues)
 
 ## Acknowledgments
 
-- **Design Inspiration**: Terminal interfaces and cyberpunk aesthetics
-- **Typography**: JetBrains Mono font family
-- **Icons**: Custom ASCII art and Unicode symbols
-- **Community**: Thanks to all contributors and users
+A big thanks to [Virtual Art Gallery](https://virtualartgallery.com/) for inspiring the design of this application. Their outstanding platform provided valuable insights that shaped my approach to building my art marketplace.
+
+## Preview
+
+#### For Artists Page
+![For Artists Page](public/images/screenshots/for-artists-page.png)
+
+
+#### For Art Lovers Page
+![For Art Lovers Page](public/images/screenshots/for-art-lovers-page.png)
+
+#### Artist Dashboard (upload artwork)
+
+![Artist Dashboard](public/images/screenshots/artist-dashboard.png)
+
+
+#### Art Gallery (browse artwork)
+
+![Art Gallery](public/images/screenshots/art-gallery.png)
+
+
+<br>
 
 ---
 
-<div align="center">
-
-**SumoArts** - Where creativity meets technology in a lofi digital space.  
-Built with ❤️ using modern React architecture and terminal-inspired design.
-
-*"Pure Art. No Gatekeepers."*
-
-![Made with React](https://img.shields.io/badge/Made%20with-React-61DAFB?style=flat-square&logo=react)
-![Firebase](https://img.shields.io/badge/Backend-Firebase-FFCA28?style=flat-square&logo=firebase)
-![TailwindCSS](https://img.shields.io/badge/Styled%20with-TailwindCSS-38B2AC?style=flat-square&logo=tailwind-css)
-![MIT License](https://img.shields.io/badge/License-MIT-green?style=flat-square)
-
-</div>
+Created with ❤️ and React by [Cátia Monteiro](https://github.com/diecatiamonteiro).     
+Thanks for reading!

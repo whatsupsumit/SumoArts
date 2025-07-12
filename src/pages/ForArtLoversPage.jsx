@@ -189,56 +189,55 @@ export default function ForArtLoversPage() {
         {/* Text Section */}
         <div className="flex flex-col w-full md:w-1/2 px-6 mt-12 md:mt-0">
           <div className="flex flex-col items-start w-full pt-16 md:pt-32 pl-4 md:pl-12 xl:pl-20 2xl:pl-32">
-            {/* Glitch effect title */}
+            {/* Enhanced lofi/cyberpunk title and content */}
             <h1
-              className="text-[var(--accent)] font-bold text-left text-5xl md:text-6xl lg:text-7xl pb-6 relative"
+              className="text-[var(--accent)] font-extrabold text-left text-3xl md:text-5xl lg:text-6xl pb-4 relative tracking-tight drop-shadow-[0_2px_12px_rgba(255,102,0,0.18)]"
               style={{ 
-                fontFamily: "var(--font-mono)", 
+                fontFamily: '"JetBrains Mono", "Fira Mono", "IBM Plex Mono", "monospace"',
                 color: 'var(--accent)',
-                textShadow: '2px 0 0 var(--accent)'
+                letterSpacing: '-0.04em',
+                textShadow: '0 2px 16px rgba(255,102,0,0.18), 0 1px 0 var(--bg)'
               }}
             >
-              <span className="block">For Art Lovers</span>
-              {/* Glitch lines */}
-              <div className="absolute top-0 left-0 w-full h-full pointer-events-none">
-                <div className="absolute top-1/4 left-0 w-3/4 h-0.5 bg-[var(--accent)] opacity-30"></div>
-                <div className="absolute bottom-1/3 right-0 w-1/2 h-0.5 bg-[var(--accent)] opacity-20"></div>
-              </div>
+              <span className="block uppercase tracking-widest" style={{ fontFamily: 'inherit', letterSpacing: '0.12em' }}>For Art Lovers</span>
+              <span className="block text-xl md:text-2xl lg:text-3xl text-[var(--text)] mt-2 font-medium" style={{ fontFamily: '"Major Mono Display", "JetBrains Mono", monospace', color: 'var(--text)', letterSpacing: '0.08em' }}>
+                Where Imagination Meets Canvas
+              </span>
             </h1>
-            
-            <div className="space-y-4 mb-8">
-              <h2 className="text-[var(--text)] text-2xl text-left lg:text-3xl font-semibold flex items-center gap-3" style={{ color: 'var(--text)', fontFamily: 'var(--font-mono)' }}>
+
+            <div className="space-y-4 mb-8 mt-2">
+              <h2 className="text-[var(--accent)] text-xl md:text-2xl lg:text-3xl font-semibold flex items-center gap-3 font-mono" style={{ color: 'var(--accent)', fontFamily: '"JetBrains Mono", monospace' }}>
                 <span className="w-2 h-2 bg-[var(--accent)] animate-pulse"></span>
-                Discover unique artworks.
+                Discover unique artworks, handpicked for the lofi soul.
               </h2>
-              <h2 className="text-[var(--text)] text-2xl text-left lg:text-3xl font-semibold flex items-center gap-3" style={{ color: 'var(--text)', fontFamily: 'var(--font-mono)' }}>
+              <h2 className="text-[var(--accent)] text-xl md:text-2xl lg:text-3xl font-semibold flex items-center gap-3 font-mono" style={{ color: 'var(--accent)', fontFamily: '"JetBrains Mono", monospace' }}>
                 <span className="w-2 h-2 bg-[var(--accent)] animate-pulse" style={{ animationDelay: '0.5s' }}></span>
-                Support independent artists.
+                Support independent artists & collect digital dreams.
               </h2>
+              <p 
+                className="text-[var(--text)] text-sm md:text-base font-mono mt-2 max-w-[32rem] md:max-w-[38rem] lg:max-w-[44rem] xl:max-w-[48rem] break-words"
+                style={{ color: 'var(--text)', fontFamily: '"Fira Mono", monospace', wordBreak: 'break-word', lineHeight: 1.5 }}
+              >
+                Step into a curated gallery of modern, cyber-inspired, and analog vibes. Browse, favorite, and own exclusive pieces that speak to your aesthetic.{' '}
+                <span className="text-[var(--accent)] font-bold whitespace-nowrap">Start your collection today.</span>
+              </p>
             </div>
           </div>
         </div>
 
         {/* Image Section with CRT effect */}
         <div className="relative w-full md:w-1/2 h-[40vh] md:h-[70vh] overflow-hidden flex items-center justify-center">
-          {/* CRT scanlines */}
-          <div 
-            className="absolute inset-0 z-30 pointer-events-none opacity-20"
-            style={{
-              backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 2px, var(--accent) 2px, var(--accent) 4px)',
-            }}
-          ></div>
           
           {/* Vignette effect */}
           <div
             className="absolute inset-0 z-20"
             style={{
-              background: `radial-gradient(circle at center, transparent 30%, var(--bg) 100%)`,
+              background: `radial-gradient(circle at center, transparent 70%, var(--bg) 100%)`,
             }}
           />
           
           <img
-            src="images/for-art-lovers-hero.jpg"
+            src="images/download 10.png"
             alt="Art Exhibition"
             className="absolute inset-0 w-full h-full object-cover object-center"
             style={{ filter: "brightness(0.7) contrast(1.1) saturate(0.8)" }}

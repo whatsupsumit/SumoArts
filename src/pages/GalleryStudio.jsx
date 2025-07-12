@@ -120,8 +120,8 @@ export default function GalleryStudio() {
         </div>
       </div>
 
-      {/* Gallery Studio Header */}
-      <section className="w-full bg-gradient-to-br from-[#0a0a0a] via-[#1a1a1a] to-[#0f0f0f] py-16 px-4 sm:px-8 lg:px-12 border-b border-[#2a2a2a]">
+      {/* Gallery Studio Header - dynamic about content */}
+      <section className="w-full bg-gradient-to-br from-[#0a0a0a] via-[#1a1a1a] to-[#0f0f0f] py-10 px-4 sm:px-8 lg:px-12 border-b border-[#2a2a2a]">
         <div className="max-w-7xl mx-auto text-center">
           <div className="inline-flex items-center gap-4 mb-8">
             <div className="w-12 h-[2px] bg-[#FFA500]"></div>
@@ -130,36 +130,37 @@ export default function GalleryStudio() {
             </span>
             <div className="w-12 h-[2px] bg-[#FFA500]"></div>
           </div>
-          
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#cccccc] mb-6 leading-tight" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
-            Create Your
-            <br />
-            <span className="text-[#FFA500]">Art Gallery</span>
-          </h1>
-          
-          <p className="text-[#888] text-lg max-w-2xl mx-auto mb-8" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
-            Upload your artwork, organize your collection, and share your creative vision with the world.
-          </p>
-
-          {/* Enhanced Upload Section */}
-          <div className="flex flex-col items-center gap-6">
-            {/* Primary Upload Button */}
+          {pins.length === 0 ? (
+            <>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#cccccc] mb-6 leading-tight" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
+                Create Your<br />
+                <span className="text-[#FFA500]">Art Gallery</span>
+              </h1>
+              <p className="text-[#888] text-lg max-w-2xl mx-auto mb-8" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
+                Upload your artwork, organize your collection, and share your creative vision with the world.
+              </p>
+            </>
+          ) : (
+            <>
+              <div className="flex flex-col items-center gap-2 mb-6">
+                <span className="text-[#FFA500] text-2xl font-bold tracking-widest" style={{ fontFamily: "'JetBrains Mono', monospace" }}>Your Library</span>
+                <span className="text-[#888] text-xs uppercase tracking-wider" style={{ fontFamily: "'JetBrains Mono', monospace" }}>Lofi Mode: <span className="text-green-400">ON</span></span>
+                <span className="bg-[#242424] border border-[#FFA500]/30 rounded-full px-4 py-1 tracking-widest shadow-sm text-xs text-[#FFA500] mt-2">{pins.length} artwork{pins.length > 1 ? 's' : ''} uploaded</span>
+              </div>
+            </>
+          )}
+          {/* Persistent Upload Button */}
+          <div className="flex flex-col items-center gap-4 mb-2">
             <button
               onClick={() => fileInputRef.current?.click()}
-              className="group relative bg-gradient-to-r from-[#FFA500] to-[#ff8c42] text-[#000] px-10 py-5 border-2 border-[#FFA500] hover:from-[#ff8c42] hover:to-[#FFA500] transition-all duration-300 font-bold text-sm uppercase tracking-wider transform hover:scale-105 rounded-xl overflow-hidden"
+              className="group relative bg-gradient-to-r from-[#FFA500] to-[#ff8c42] text-[#000] px-8 py-4 border-2 border-[#FFA500] hover:from-[#ff8c42] hover:to-[#FFA500] transition-all duration-300 font-bold text-sm uppercase tracking-wider transform hover:scale-105 rounded-xl overflow-hidden"
               style={{ fontFamily: "'JetBrains Mono', monospace" }}
             >
-              {/* Button Background Effect */}
               <div className="absolute inset-0 bg-gradient-to-r from-[#FFA500]/20 to-[#ff8c42]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              
               <span className="flex items-center justify-center gap-4 relative z-10">
                 <span className="text-lg">Upload Artwork</span>
-                
-                {/* Lofi Upload Icon */}
                 <div className="relative">
                   <span className="text-2xl group-hover:translate-y-[-3px] transition-transform duration-300">⇪</span>
-                  
-                  {/* Glitch Lines */}
                   <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <div className="absolute top-0 left-0 w-full h-[1px] bg-[#000] animate-pulse"></div>
                     <div className="absolute bottom-0 left-0 w-full h-[1px] bg-[#000] animate-pulse delay-75"></div>
@@ -167,8 +168,6 @@ export default function GalleryStudio() {
                 </div>
               </span>
             </button>
-
-            {/* Secondary Info */}
             <div className="flex items-center gap-4 text-[#666] text-sm" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 bg-[#FFA500] rounded-full animate-pulse"></div>
@@ -181,7 +180,6 @@ export default function GalleryStudio() {
               </div>
             </div>
           </div>
-
           <input
             ref={fileInputRef}
             type="file"
@@ -264,23 +262,8 @@ export default function GalleryStudio() {
                 </div>
               </div>
 
-              {/* Enhanced Upload Button */}
-              <button
-                onClick={() => fileInputRef.current?.click()}
-                className="group relative bg-gradient-to-r from-[#FFA500] to-[#ff8c42] text-[#000] px-8 py-4 rounded-xl font-bold hover:from-[#ff8c42] hover:to-[#FFA500] transition-all duration-300 transform hover:scale-105 overflow-hidden"
-                style={{ fontFamily: "'JetBrains Mono', monospace" }}
-              >
-                {/* Button Glow Effect */}
-                <div className="absolute inset-0 bg-gradient-to-r from-[#FFA500]/30 to-[#ff8c42]/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm"></div>
-                
-                <span className="flex items-center justify-center gap-3 relative z-10">
-                  <span className="text-lg font-bold">Upload Now</span>
-                  <div className="relative">
-                    <span className="text-xl group-hover:translate-y-[-2px] transition-transform duration-300">⇪</span>
-                    <div className="absolute inset-0 text-xl text-[#000]/50 group-hover:translate-x-[1px] group-hover:translate-y-[1px] transition-transform duration-300">⇪</div>
-                  </div>
-                </span>
-              </button>
+
+              {/* Removed duplicate upload button for lofi minimalism */}
 
               {/* Status Bar */}
               <div className="flex items-center justify-center gap-4 mt-8 text-[#666] text-sm" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
@@ -298,10 +281,10 @@ export default function GalleryStudio() {
           ) : (
             /* Gallery Grid */
             <div className="columns-1 md:columns-2 lg:columns-3 xl:columns-4 gap-6 space-y-6">
-              {pins.map((pin) => (
+              {pins.map((pin, idx) => (
                 <div 
                   key={pin.id}
-                  className={`break-inside-avoid bg-[#242424] rounded-xl border border-[#333] overflow-hidden hover:border-[#FFA500] transition-all duration-300 group ${getSizeClass(pin.size)}`}
+                  className={`break-inside-avoid bg-[#242424] rounded-xl border border-[#333] overflow-hidden hover:border-[#FFA500] transition-all duration-300 group relative ${getSizeClass(pin.size)}`}
                 >
                   {/* Pin Image */}
                   <div className="relative h-full">
@@ -310,7 +293,15 @@ export default function GalleryStudio() {
                       alt={pin.title}
                       className="w-full h-full object-cover"
                     />
-                    
+                    {/* Remove Button */}
+                    <button
+                      onClick={() => setPins(pins.filter((p, i) => i !== idx))}
+                      className="absolute top-3 right-3 z-20 bg-[#FFA500] text-black rounded-full w-8 h-8 flex items-center justify-center shadow-lg hover:bg-[#ff8c42] transition-colors duration-200 border-2 border-[#FFA500] hover:border-[#ff8c42]"
+                      title="Remove artwork"
+                      style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 700 }}
+                    >
+                      ×
+                    </button>
                     {/* Overlay */}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                       <div className="absolute bottom-4 left-4 right-4">

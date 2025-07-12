@@ -1,10 +1,8 @@
 {
-  "name": "sumoarts-digital-gallery",
+  "name": "virtual-art-gallery-react",
   "private": true,
-  "version": "1.0.0",
+  "version": "0.0.0",
   "type": "module",
-  "description": "A modern lofi-aesthetic digital art gallery platform with terminal-inspired design",
-  "author": "Your Name",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
