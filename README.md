@@ -7,7 +7,7 @@ This project was created as my final React SPA module project and is my first fu
 
 🔗 [Visit the live demo here!](https://online-art-gallery-react.vercel.app/)
 
-<img src="public/images/screenshots/home-page.png" alt="Home Page" width="500" />
+<img src="public/images/screenshots/homepage.png" alt="Home Page" width="500" />
 
 <br>
 
@@ -129,7 +129,7 @@ A big thanks to [Virtual Art Gallery](https://virtualartgallery.com/) for inspir
 
 
 #### For Art Lovers Page
-![For Art Lovers Page](public/images/screenshots/for-art-lovers-page.png)
+![For Art Lovers Page](public/images/screenshots/artlover.png)
 
 #### Artist Dashboard (upload artwork)
 
@@ -138,12 +138,12 @@ A big thanks to [Virtual Art Gallery](https://virtualartgallery.com/) for inspir
 
 #### Art Gallery (browse artwork)
 
-![Art Gallery](public/images/screenshots/art-gallery.png)
+![Art Gallery](public/images/screenshots/artgal.png)
 
 
 <br>
 
 ---
 
-Created with ❤️ and React by [Cátia Monteiro](https://github.com/diecatiamonteiro).     
+Created with ❤️ and React by [Mr Sumo](https://github.com/Whatsupsumit).     
 Thanks for reading!
