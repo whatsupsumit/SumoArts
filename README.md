@@ -5,7 +5,7 @@
 This project was created as my final React SPA module project and is my first fully responsive and tested application! 🎉 It therefore represents a significant personal growth in my development journey! 
 
 
-🔗 [Visit the live demo here!](https://online-art-gallery-react.vercel.app/)
+🔗 [Visit the live demo here!](https://sumo-arts.vercel.app/)
 
 <img src="public/images/screenshots/homepage.png" alt="Home Page" width="500" />
 
