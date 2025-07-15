@@ -188,12 +188,12 @@ export default function HomePage() {
                   >
                     {/* Dynamic Art Cards */}
                     {[
-                      '/images/download 1.jpg',
-                      '/images/download 2.jfif', 
                       '/images/download 3.jpeg',
                       '/images/download 4.jfif',
+                      '/images/download 2.jfif', 
                       '/images/download 5.jfif',
-                      '/images/download 6.jpeg'
+                      '/images/download 6.jpeg',
+                      '/images/download 1.jpg'
                     ].map((imgSrc, index) => (
                       <div 
                         key={index}
